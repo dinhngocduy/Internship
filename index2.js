@@ -69,6 +69,19 @@ password.onblur=function(){
             password.classList.add("invalid")
             document.getElementById("alertPassword").innerHTML="Need atleast 1 uppercase character or 1 lowercase character"
         }
+        else if(password.value.length!==passwordConfirm.value.length &&passwordConfirm.value.length!==0){
+            passwordConfirm.classList='invalid'
+            document.getElementById("alertPasswordConfirm").style.color='red'
+            document.getElementById("alertPasswordConfirm").innerHTML='Password Not Correct!';
+            document.getElementById('signUp').disabled = true;
+            password.classList="valid"
+        }
+        else if(password.value.length===passwordConfirm.value.length &&passwordConfirm.value.length!==0){
+            document.getElementById("alertPasswordConfirm").innerHTML='Correct!';
+            document.getElementById("alertPasswordConfirm").style.color='green'
+            passwordConfirm.classList='valid';
+            password.classList="valid"
+        }
         else{
             password.classList="valid"
         }
@@ -82,12 +95,14 @@ password.onfocus=function(){
     }
 }
 passwordConfirm.onblur=function(){
-    if(passwordConfirm.value==''){
+    if(passwordConfirm.value===''){
         passwordConfirm.classList="invalid";
         document.getElementById("alertPasswordConfirm").style.color='red'
         document.getElementById("alertPasswordConfirm").innerHTML='Must Not Be Empty';
     }
-
+    else if(passwordConfirm.value===password.value){
+        passwordConfirm.classList="valid";
+    }
 }
 passwordConfirm.oninput=function(){  
     if(passwordConfirm.value===password.value){
